@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('employees/', views.get_all_employees, name='get_all_employees'),
     path('add/', views.add_employee, name='add_employee'),
-    path('search/', views.search_employee, name='search_employee')
+    path('search/', views.search_employee, name='search_employee'),
+    path('retrieve_employees/', views.retrieve_employees, name='retrieve_employees')
 ]

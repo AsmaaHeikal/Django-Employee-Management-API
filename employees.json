@@ -70,5 +70,37 @@
                 "ScoreOutof100": 80
             }
         ]
+    },
+    {
+        "FirstName": "eyad",
+        "LastName": "Heikal",
+        "EmployeeID": 6001,
+        "Designation": "brother",
+        "KnownLanguages": [
+            {
+                "LanguageName": "C#",
+                "ScoreOutof100": 40
+            },
+            {
+                "LanguageName": "C++",
+                "ScoreOutof100": 80
+            }
+        ]
+    },
+    {
+        "FirstName": "Salma",
+        "LastName": "Gamal",
+        "EmployeeID": 6002,
+        "Designation": "Data Analyst",
+        "KnownLanguages": [
+            {
+                "LanguageName": "Java",
+                "ScoreOutof100": 85
+            },
+            {
+                "LanguageName": "C++",
+                "ScoreOutof100": 80
+            }
+        ]
     }
 ]
