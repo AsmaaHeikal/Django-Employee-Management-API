@@ -22,5 +22,8 @@ urlpatterns = [
     path('employees/', views.get_all_employees, name='get_all_employees'),
     path('add/', views.add_employee, name='add_employee'),
     path('search/', views.search_employee, name='search_employee'),
-    path('retrieve_employees/', views.retrieve_employees, name='retrieve_employees')
+    path('retrieve_employees/', views.retrieve_employees, name='retrieve_employees'),
+    path('delete/', views.delete_employee, name='delete_employee'),
+    path('update/', views.update_employee, name='update_employee')
+
 ]
