@@ -43,14 +43,20 @@ def search_employee(request):
 
 
 def get_min(employees):
+    # Initialize the minimum employee and score
+    minimum = None
+    min_score = float('inf')  # Start with a very high value for the score
 
-    minimum = employees[0]["KnownLanguages"]
+    # Iterate through all employees
     for emp in employees:
-        langs = emp[5]
+        langs = emp["KnownLanguages"]
         for lang in langs:
-            if lang.get("LanguageName") == "Java" and minimum.get("LanguageName") == "Java":
-                if lang.get("ScoreOutof100") < minimum.get("ScoreOutof100"):
-                    minimum = lang
+            # Check if the language is "Java"
+            if lang["LanguageName"] == "Java":
+                # If the current score is lower than min_score, update minimum and min_score
+                if lang["ScoreOutof100"] < min_score:
+                    minimum = emp
+                    min_score = lang["ScoreOutof100"]
 
     return minimum
 

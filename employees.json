@@ -62,5 +62,21 @@
                 "ScoreOutof100": 80
             }
         ]
+    },
+    {
+        "FirstName": "Salma",
+        "LastName": "Gamal",
+        "EmployeeID": 6002,
+        "Designation": "Data Analyst",
+        "KnownLanguages": [
+            {
+                "LanguageName": "Java",
+                "ScoreOutof100": 85
+            },
+            {
+                "LanguageName": "C++",
+                "ScoreOutof100": 80
+            }
+        ]
     }
 ]
