@@ -24,6 +24,15 @@ def get_all_employees(request):
 @csrf_exempt
 def add_employee(request):
     if request.method == "POST":
+
+        # check if id already exists in the database
+        if request.body:
+            new_employee = json.loads(request.body)
+            data = read_json()
+            for emp in data:
+                if emp.get("EmployeeID") == new_employee.get("EmployeeID"):
+                    return JsonResponse({"error": "Employee already exists"}, status=400)
+
         new_employee = json.loads(request.body)
         data = read_json()
         data.append(new_employee)
