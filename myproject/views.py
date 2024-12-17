@@ -42,7 +42,10 @@ def search_employee(request):
     return JsonResponse({"results": search_results})
 
 
-def get_min(employees):
+def get_min(employees, language):
+    """
+    Finds the employee with the minimum score for the specified language.
+    """
     # Initialize the minimum employee and score
     minimum = None
     min_score = float('inf')  # Start with a very high value for the score
@@ -51,8 +54,8 @@ def get_min(employees):
     for emp in employees:
         langs = emp["KnownLanguages"]
         for lang in langs:
-            # Check if the language is "Java"
-            if lang["LanguageName"] == "Java":
+            # Check if the language matches the input
+            if lang["LanguageName"] == language:
                 # If the current score is lower than min_score, update minimum and min_score
                 if lang["ScoreOutof100"] < min_score:
                     minimum = emp
@@ -61,26 +64,72 @@ def get_min(employees):
     return minimum
 
 
-def sort_acs(employees):
+def sort_acs(employees, language):
+    """
+    Sorts the employees in ascending order based on their scores for the specified language.
+    """
     result = []
     while len(employees) != 0:
-        minimum = get_min(employees)
+        minimum = get_min(employees, language)
         result.append(minimum)
         employees.remove(minimum)
     return result
 
-@csrf_exempt
+
+def get_min(employees, language):
+    """
+    Finds the employee with the minimum score for the specified language.
+    """
+    minimum = None
+    min_score = float('inf')
+
+    for emp in employees:
+        langs = emp.get("KnownLanguages", [])
+        for lang in langs:
+            if lang.get("LanguageName") == language:
+                if lang.get("ScoreOutof100", 0) < min_score:
+                    minimum = emp
+                    min_score = lang["ScoreOutof100"]
+
+    return minimum
+
+def sort_acs(employees, language):
+    """
+    Sorts the employees in ascending order based on their scores for the specified language.
+    """
+    result = []
+    while len(employees) != 0:
+        minimum = get_min(employees, language)
+        result.append(minimum)
+        employees.remove(minimum)
+    return result
+
 def retrieve_employees(request):
+    """
+    Retrieves and sorts employees who meet the score threshold for a specific language.
+    """
+    # Get query parameters
+    language = request.GET.get("language")
+    min_score_threshold = request.GET.get("min_score_threshold")
+    x = int(min_score_threshold)
+
+    # Read data from JSON
     data = read_json()
     results = []
+
+    # Filter employees based on language and score threshold
     for emp in data:
-        langs = emp.get("KnownLanguages")
+        langs = emp.get("KnownLanguages", [])
         for lang in langs:
-            if lang.get("LanguageName") == "Java" and lang.get("ScoreOutof100") > 50:
+            if lang.get("LanguageName") == language and lang.get("ScoreOutof100") >= x:
                 results.append(emp)
 
-    x = sort_acs(results)
-    return JsonResponse({"results": x})
+    # Sort results
+    sorted_results = sort_acs(results.copy(), language)
+
+    # Return as JSON response
+    return JsonResponse({"results": sorted_results})
+
 
 @csrf_exempt
 def delete_employee(request):

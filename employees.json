@@ -78,5 +78,21 @@
                 "ScoreOutof100": 80
             }
         ]
+    },
+    {
+        "FirstName": "Noura",
+        "LastName": "Gamal",
+        "EmployeeID": 6008,
+        "Designation": "Data Analyst",
+        "KnownLanguages": [
+            {
+                "LanguageName": "SQL",
+                "ScoreOutof100": 60
+            },
+            {
+                "LanguageName": "Python",
+                "ScoreOutof100": 80
+            }
+        ]
     }
 ]
